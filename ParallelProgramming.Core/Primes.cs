@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+
 namespace ParallelProgramming.Core;
 
 public class Primes
@@ -15,15 +17,21 @@ public class Primes
         return primes;
     }
 
-    public List<int> GetPrimesParallel(int first, int last)
+    public List<long> GetPrimesParallel(long first, long last)
     {
+        var result = new ConcurrentBag<long>();
         var range = last - first;
-        var r = from i in Enumerable.Range(first, range - 1).AsParallel()
-            where Enumerable.Range(1, (int) Math.Sqrt(i)).All(j => j == 1 || i % j != 0)
-            select i;
-        return r.OrderBy(x => x).ToList();
+        Parallel.For(first, last, (i, state) =>
+        {
+            if (IsPrime(i))
+            {
+                result.Add(i);
+            }
+        });
+
+        return result.OrderBy(x => x).ToList();
     }
-    
+
     private bool IsPrime(long num)
     {
         if (num == 1) return false;
