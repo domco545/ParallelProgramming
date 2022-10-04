@@ -1,19 +1,10 @@
 using System.Collections.Concurrent;
-using System.Diagnostics;
 
 namespace ParallelProgramming.Core;
 
 public class Primes
 {
-    public Primes()
-    {
-        Console.WriteLine("Sequential implementation");
-        MeasureTime(() => GetPrimesSequential(1, 1000000));
-
-        Console.WriteLine("Parallel implementation");
-        MeasureTime(() => GetPrimesParallel(1, 1000000));
-    }
-    public List<long> GetPrimesSequential(int first, int last)
+    public List<long> GetPrimesSequential(long first, long last)
     {
         List<long> primes = new List<long>();
         for (long i = first; i <= last; i++)
@@ -52,12 +43,5 @@ public class Primes
             if (num % i == 0)  
                 return false;
         return true;
-    }
-    private static void MeasureTime(Action ac)
-    {
-        Stopwatch sw = Stopwatch.StartNew();
-        ac.Invoke();
-        sw.Stop();
-        Console.WriteLine("Time = " + sw.Elapsed.Milliseconds);
     }
 }
