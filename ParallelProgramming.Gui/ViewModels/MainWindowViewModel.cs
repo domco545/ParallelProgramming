@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Avalonia.Media;
 using DynamicData;
 using ParallelProgramming.Core;
 using ReactiveUI;
@@ -64,13 +61,13 @@ namespace ParallelProgramming.Gui.ViewModels
             if (_selectedAlgorithm.Content.ToString() == "Sequential")
             {
                 var resultSequential = await _primesLogic.GetPrimesSequentialAsync(_fromInputField, _toInputField);
-                Primes.AddRange(resultSequential);
+                Primes.AddRange(resultSequential.TakeLast(10000));
 
             }
             else
             {
                 var resultParallel = await _primesLogic.GetPrimesParallelAsync(_fromInputField, _toInputField);
-                Primes.AddRange(resultParallel);
+                Primes.AddRange(resultParallel.TakeLast(10000));
             }
         }
     }
