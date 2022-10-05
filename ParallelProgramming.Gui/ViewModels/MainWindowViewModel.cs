@@ -23,6 +23,7 @@ namespace ParallelProgramming.Gui.ViewModels
         }
 
         private ComboBoxItem _selectedAlgorithm;
+
         public ComboBoxItem SelectedAlgorithm
         {
             get => _selectedAlgorithm;
@@ -33,21 +34,24 @@ namespace ParallelProgramming.Gui.ViewModels
             }
         }
 
-        private int _fromInputField;
-        public int FromInputField
+        private long _fromInputField;
+
+        public long FromInputField
         {
             get => _fromInputField;
             set => this.RaiseAndSetIfChanged(ref _fromInputField, value);
         }
-        
-        private int _toInputField;
-        public int ToInputField
+
+        private long _toInputField;
+
+        public long ToInputField
         {
             get => _toInputField;
             set => this.RaiseAndSetIfChanged(ref _toInputField, value);
         }
-        
+
         private ObservableCollection<long> _primes = new ObservableCollection<long>();
+
         public ObservableCollection<long> Primes
         {
             get => _primes;
@@ -57,15 +61,13 @@ namespace ParallelProgramming.Gui.ViewModels
         public async Task OnClick_CalculateButton()
         {
             await Task.Delay(100);
-            // _primesLogic.GetPrimesSequential()
-
-            // Primes.AddRange(new List<long>(){100,1000000,1000000000});
+            var resultSequential = _primesLogic.GetPrimesSequential( _fromInputField,  _toInputField);
+            Primes.AddRange(resultSequential);
             // Console.WriteLine(_selectedAlgorithm.Content);
             Console.WriteLine("from: " + _fromInputField);
             Console.WriteLine("to: " + _toInputField);
 
             Console.WriteLine("click");
-
         }
     }
 }
