@@ -17,6 +17,11 @@ public class Primes
         return primes;
     }
 
+    public Task<List<long>> GetPrimesSequentialAsync(long first, long last)
+    {
+        return Task.Run(() => GetPrimesSequential(first, last));
+    }
+
     public List<long> GetPrimesParallel(long first, long last)
     {
         var result = new ConcurrentBag<long>();
@@ -30,6 +35,11 @@ public class Primes
         });
 
         return result.OrderBy(x => x).ToList();
+    }
+
+    public Task<List<long>> GetPrimesParallelAsync(long first, long last)
+    {
+        return Task.Run(() => GetPrimesParallel(first, last));
     }
 
     private bool IsPrime(long num)
