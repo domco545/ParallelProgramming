@@ -60,14 +60,19 @@ namespace ParallelProgramming.Gui.ViewModels
 
         public async Task OnClick_CalculateButton()
         {
-            await Task.Delay(100);
-            var resultSequential = _primesLogic.GetPrimesSequential( _fromInputField,  _toInputField);
-            Primes.AddRange(resultSequential);
-            // Console.WriteLine(_selectedAlgorithm.Content);
-            Console.WriteLine("from: " + _fromInputField);
-            Console.WriteLine("to: " + _toInputField);
+            await Task.Delay(1);
+            if (_selectedAlgorithm.Content.ToString() == "Sequential")
+            {
+                var resultSequential = _primesLogic.GetPrimesSequential(_fromInputField, _toInputField);
+                Primes.AddRange(resultSequential);
 
-            Console.WriteLine("click");
+            }
+            else
+            {
+                var resultParallel = _primesLogic.GetPrimesParallel(_fromInputField, _toInputField);
+                Primes.AddRange(resultParallel);
+
+            }
         }
     }
 }
