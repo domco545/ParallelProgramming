@@ -11,6 +11,7 @@ using ReactiveUI;
 
 namespace ParallelProgramming.Gui.ViewModels
 {
+    // comment
     public class MainWindowViewModel : ViewModelBase
     {
         // logic instance
