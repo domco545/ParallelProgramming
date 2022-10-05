@@ -6,15 +6,18 @@ var primes = new Primes();
 var st = new Stopwatch();
 st.Start();
 
-var a= primes.GetPrimesSequential(1, 10000000);
+long from = 1;
+long to = 100000;
+
+var a= primes.GetPrimesSequential(from, to);
 Console.WriteLine($"Sequential time: {st.Elapsed.TotalSeconds}");
-Console.WriteLine(a.Last());
+// Console.WriteLine(a.Last());
 
 st.Restart();
 
-var b = primes.GetPrimesParallel(1, 10000000);
+var b = primes.GetPrimesParallel(from, to);
 Console.WriteLine($"Parallel time: {st.Elapsed.TotalSeconds}");
-Console.WriteLine(b.Last());
+// Console.WriteLine(b.Last());
 
 st.Stop();
 
