@@ -26,7 +26,7 @@ public class Primes
     {
         var result = new ConcurrentBag<long>();
         var range = last - first;
-        Parallel.For(first, last, (i, state) =>
+        Parallel.For(first, last + 1, (i, state) =>
         {
             if (IsPrime(i))
             {
